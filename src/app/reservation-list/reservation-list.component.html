@@ -1,3 +1,5 @@
+<app-home></app-home>
+
 <h2>Reservation List</h2>
 
 <ul *ngIf="reservations.length; else noReservation">
@@ -8,7 +10,7 @@
         Check-In: {{reservation.checkInDate}} <br />
         Check-out: {{reservation.checkOutDate}} <br />
         <button (click)="deleteReservation(reservation.id)">Delete</button>
-        <button [routerLink]="['/edit', reservation.id]"></button>
+        <button [routerLink]="['/edit', reservation.id]">Edit</button>
     </li>
 </ul>
 
