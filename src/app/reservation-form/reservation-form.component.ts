@@ -30,15 +30,6 @@ export class ReservationFormComponent implements OnInit{
       roomNumber: ['', Validators.required]
     })
 
-    let id = this.activatedRoute.snapshot.paramMap.get('id')
-
-    if(id) {
-      let reservation = this.reservationService.getReservation(id);
-
-      if(reservation) {
-        this.reservationForm.patchValue(reservation)
-      }
-    }
   }
 
   deleteReservation(id: string) {
@@ -49,7 +40,17 @@ export class ReservationFormComponent implements OnInit{
     if(this.reservationForm.valid) {
 
       let reservation: Reservation = this.reservationForm.value;
-      this.reservationService.addReservation(reservation);
+
+      let id = this.activatedRoute.snapshot.paramMap.get('id')
+
+      if(id) {
+        // Uptade
+        this.reservationService.updateReservation(id, reservation)
+      } else {
+        // New
+        this.reservationService.addReservation(reservation);
+      }
+
 
       this.router.navigate(['/list'])
     }
